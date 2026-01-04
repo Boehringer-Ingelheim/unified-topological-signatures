@@ -1,5 +1,8 @@
 # Unified Topological Signatures
 
+![Visual Abstract](images/visual_abstract.png)
+
+
 
 ## Installation
 
