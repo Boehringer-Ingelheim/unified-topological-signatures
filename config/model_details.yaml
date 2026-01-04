@@ -1,0 +1,436 @@
+Alibaba-NLP/gte-Qwen2-1.5B-instruct:
+  model_size: 1.5
+  embedding_dimension: 1536
+  context_size: 32000
+  model_name_short: gte-Qwen2-1.5B-instruct
+  model_family: Qwen
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 151936
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True
+  layers: 28
+  activation: "silu"
+Alibaba-NLP/gte-Qwen2-7B-instruct:
+  model_size: 7
+  embedding_dimension: 3584
+  context_size: 32000
+  model_name_short: gte-Qwen2-7B-instruct
+  model_family: Qwen
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 151936
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True
+  layers: 28
+  activation: "silu"
+BAAI/bge-large-en-v1.5:
+  model_size: 0.326
+  embedding_dimension: 1024
+  context_size: 512
+  model_name_short: bge-large-en-v1.5
+  model_family: BGE
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 0
+  moe: False
+  hard_neg: True
+  architecture: Encoder
+  multilingual: False
+  layers: 12
+  activation: "gelu"
+BAAI/bge-base-en-v1.5:
+  model_size: 0.102
+  embedding_dimension: 768
+  context_size: 512
+  model_name_short: bge-base-en-v1.5
+  model_family: BGE
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 0
+  moe: False
+  hard_neg: True
+  architecture: Encoder
+  multilingual: False
+  layers: 12
+  activation: "gelu"
+BAAI/bge-small-en-v1.5:
+  model_size: 0.024
+  embedding_dimension: 384
+  context_size: 512
+  model_name_short: bge-small-en-v1.5
+  model_family: BGE
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 0
+  moe: False
+  hard_neg: True
+  architecture: Encoder
+  multilingual: False
+  layers: 12
+  activation: "gelu"
+Linq-AI-Research/Linq-Embed-Mistral:
+  model_size: 7.3
+  embedding_dimension: 4096
+  context_size: 32768
+  model_name_short: linq-embed-mistral
+  model_family: E5
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 32000
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True
+  layers: 32
+  activation: "silu"
+Salesforce/SFR-Embedding-Mistral:
+  model_size: 7.3
+  embedding_dimension: 4096
+  context_size: 32768
+  model_name_short: sfr-embedding-mistral
+  model_family: E5
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 32000
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True
+  layers: 32
+  activation: "silu"
+intfloat/e5-mistral-7b-instruct:
+  model_size: 7.3
+  embedding_dimension: 4096
+  context_size: 32768
+  model_name_short: e5-mistral-7b-instruct
+  model_family: E5
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 32000 
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True # LLM-based
+  layers: 32
+  activation: "silu"
+intfloat/multilingual-e5-large-instruct:
+  model_size: 0.56
+  embedding_dimension: 1024
+  context_size: 512
+  model_name_short: multilingual-e5-large-instruct
+  model_family: E5
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 250000 
+  moe: False
+  hard_neg: True
+  architecture: Encoder
+  multilingual: True
+  layers: 24
+  activation: "gelu"
+Qwen/Qwen3-Embedding-0.6B:
+  model_size: 0.6
+  embedding_dimension: 1024
+  context_size: 32000
+  model_name_short: qwen3-embedding-0.6B
+  model_family: Qwen
+  training_loss: Contrastive
+  instruction_tuned: True 
+  vocabulary_size: 151936
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True
+  layers: 28
+  activation: "silu"
+Qwen/Qwen3-Embedding-4B:
+  model_size: 4
+  embedding_dimension: 2560
+  context_size: 32000
+  model_name_short: qwen3-embedding-4B
+  model_family: Qwen
+  training_loss: Contrastive
+  instruction_tuned: True 
+  vocabulary_size: 151936
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True
+  layers: 36
+  activation: "silu"
+Qwen/Qwen3-Embedding-8B:
+  model_size: 8
+  embedding_dimension: 4096
+  context_size: 32000
+  model_name_short: qwen3-embedding-8B  
+  model_family: Qwen
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 151936
+  moe: False
+  hard_neg: True
+  architecture: Decoder
+  multilingual: True
+  layers: 36
+  activation: "silu"
+Snowflake/snowflake-arctic-embed-m-v1.5:
+  model_size: 0.11
+  embedding_dimension: 768
+  context_size: 512
+  model_name_short: snowflake-arctic-embed-m-v1.5
+  model_family: Arctic
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 30522 
+  moe: False
+  hard_neg: True
+  architecture: Encoder
+  multilingual: False
+  layers: 12
+  activation: "gelu"
+apollo/openai-text-embedding-3-large:
+  model_size: 7 # placeholder
+  embedding_dimension: 3072
+  context_size: 8192
+  model_name_short: openai-text-embedding-3-large
+  model_family: OpenAI
+  training_loss: Contrastive # placeholder
+  instruction_tuned: False # placeholder
+  vocabulary_size: 50257
+  moe: False # placeholder
+  hard_neg: True # placeholder
+  architecture: Decoder # placeholder
+  multilingual: True # placeholder
+  layers: 0 # placeholder
+  activation: "unknown"
+apollo/openai-text-embedding-3-small:
+  model_size: 1 # placeholder
+  embedding_dimension: 1536
+  context_size: 8191
+  model_name_short: openai-text-embedding-3-small
+  model_family: OpenAI
+  training_loss: Contrastive # placeholder
+  instruction_tuned: False 
+  vocabulary_size: 50257 
+  moe: False # placeholder
+  hard_neg: True # placeholder
+  architecture: Decoder # placeholder
+  multilingual: True # placeholder
+  layers: 0 # placeholder
+  activation: "unknown"
+dunzhang/stella_en_1.5B_v5:
+  model_size: 1.5
+  embedding_dimension: 1024
+  context_size: 128000
+  model_name_short: stella_en_1.5B_v5
+  model_family: Qwen
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 30522
+  moe: False 
+  hard_neg: True 
+  architecture: Decoder 
+  multilingual: True 
+  layers: 28
+  activation: "silu"
+google/gemini-embedding-001:
+  model_size: 7 # placeholder
+  embedding_dimension: 3072
+  context_size: 8192
+  model_name_short: gemini-embedding-001
+  model_family: Gemini
+  training_loss: Contrastive
+  instruction_tuned: False 
+  vocabulary_size: 0
+  moe: False 
+  hard_neg: True 
+  architecture: Decoder 
+  multilingual: True 
+  layers: 0
+  activation: "unknown"
+llmrails/ember-v1:
+  model_size: 0.335
+  embedding_dimension: 1024
+  context_size: 512
+  model_name_short: ember-v1
+  model_family: Ember
+  training_loss: Contrastive
+  instruction_tuned: False
+  vocabulary_size: 30522 
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder # placeholder
+  multilingual: True 
+  layers: 24
+  activation: "gelu"
+mixedbread-ai/mxbai-embed-xsmall-v1:
+  model_size: 0.135
+  embedding_dimension: 384
+  context_size: 4096  
+  model_name_short: mxbai-embed-xsmall-v1
+  model_family: MiniLM
+  training_loss: AnglE
+  instruction_tuned: False 
+  vocabulary_size: 30522
+  moe: False 
+  hard_neg: False 
+  architecture: Encoder
+  multilingual: False 
+  layers: 6
+  activation: "gelu"
+mixedbread-ai/mxbai-embed-large-v1:
+  model_size: 0.335
+  embedding_dimension: 512
+  context_size: 512 
+  model_name_short: mxbai-embed-large-v1
+  model_family: MiniLM
+  training_loss: AnglE
+  instruction_tuned: False 
+  vocabulary_size: 30522
+  moe: False 
+  hard_neg: False 
+  architecture: Encoder
+  multilingual: False 
+  layers: 24
+  activation: "gelu"
+sentence-transformers/all-MiniLM-L6-v2:
+  model_size: 0.022
+  embedding_dimension: 384
+  context_size: 512 
+  model_name_short: all-MiniLM-L6-v2
+  model_family: MiniLM
+  training_loss: Contrastive
+  instruction_tuned: False
+  vocabulary_size: 30522 
+  moe: False 
+  hard_neg: False 
+  architecture: Encoder
+  multilingual: False 
+  layers: 6 
+  activation: "gelu"  
+sentence-transformers/gtr-t5-base:
+  model_size: 0.11
+  embedding_dimension: 768
+  context_size: 512
+  model_name_short: gtr-t5-base
+  model_family: T5
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 32128
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 12
+  activation: "relu"
+sentence-transformers/gtr-t5-large:
+  model_size: 0.335
+  embedding_dimension: 768
+  context_size: 512
+  model_name_short: gtr-t5-large
+  model_family: T5
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 32128 # T5 vocabulary size
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 24
+  activation: "relu"
+sentence-transformers/gtr-t5-xxl:
+  model_size: 4.8
+  embedding_dimension: 768
+  context_size: 512
+  architecture: T5 # Encoder
+  model_name_short: gtr-t5-xxl
+  model_family: T5
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 32128 # T5 vocabulary size
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 24
+  activation: "relu"
+thenlper/gte-small:
+  model_size: 0.33
+  embedding_dimension: 384
+  context_size: 512
+  model_name_short: gte-small
+  model_family: GTE
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 30522 # Common BERT vocabulary size
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 12
+  activation: "gelu"
+thenlper/gte-base:
+  model_size: 0.11
+  embedding_dimension: 768
+  context_size: 512
+  model_name_short: gte-base
+  model_family: GTE
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 30522 # Common BERT vocabulary size
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 12
+  activation: "gelu"
+thenlper/gte-large:
+  model_size: 0.335
+  embedding_dimension: 1024
+  context_size: 512
+  model_name_short: gte-large
+  model_family: GTE
+  training_loss: Contrastive
+  instruction_tuned: True
+  vocabulary_size: 30522 # Common BERT vocabulary size
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 24
+  activation: "gelu"
+sentence-transformers/msmarco-roberta-base-ance-firstp:
+  model_size: 0.125
+  embedding_dimension: 768
+  context_size: 512
+  model_name_short: msmarco-roberta-base-ance-firstp
+  model_family: ANCE
+  training_loss: ANCE
+  instruction_tuned: False 
+  vocabulary_size: 50265 # RoBERTa vocabulary size
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 12
+  activation: "gelu"
+sentence-transformers/msmarco-distilbert-base-tas-b:
+  model_size: 0.066
+  embedding_dimension: 768
+  context_size: 512
+  model_name_short: msmarco-distilbert-base-tas-b
+  model_family: TAS
+  training_loss: Triplet-loss
+  instruction_tuned: False 
+  vocabulary_size: 30522 # DistilBERT vocabulary size
+  moe: False 
+  hard_neg: True 
+  architecture: Encoder
+  multilingual: False 
+  layers: 6
+  activation: "gelu"

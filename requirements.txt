@@ -1,0 +1,14 @@
+tqdm==4.67.1
+google-genai==1.19.0
+python-dotenv==1.0.1
+ripser==0.6.8
+scikit-dimension==0.3.4
+scikit-learn==1.5.1
+vendi-score==0.0.3
+giotto-tda=0.6.0
+torch==2.3.1
+krypy>2.2.0
+numba>0.59.1
+numexpr>2.10.1
+numpy
+pandas

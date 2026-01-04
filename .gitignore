@@ -1,0 +1,7 @@
+**/__pycache__/**
+.env
+metrics_logs/
+results/
+results_logs/
+metrics_results/
+detailed_results/
