@@ -6,7 +6,7 @@ scikit-dimension==0.3.4
 scikit-learn==1.5.1
 vendi-score==0.0.3
 giotto-tda==0.6.0
-torch==2.3.1
+torch==2.8.0
 krypy>2.2.0
 numba>0.59.1
 numexpr>2.10.1
