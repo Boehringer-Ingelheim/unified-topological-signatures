@@ -1,7 +1,7 @@
 #!/bin/bash
 
 models=(
-  # "google/gemini-embedding-001"
+  "google/gemini-embedding-001"
   # "google/text-embedding-004"
   # "BAAI/bge-small-en-v1.5"
   # "BAAI/bge-base-en-v1.5"
@@ -13,7 +13,7 @@ models=(
   # "mixedbread-ai/mxbai-embed-xsmall-v1"
   # "Alibaba-NLP/gte-Qwen2-1.5B-instruct"
   # "Alibaba-NLP/gte-Qwen2-7B-instruct"
-  'sentence-transformers/gtr-t5-base'
+  # 'sentence-transformers/gtr-t5-base'
   # 'sentence-transformers/gtr-t5-large'
   # 'sentence-transformers/gtr-t5-xxl'
   # "Qwen/Qwen3-Embedding-0.6B"
@@ -35,12 +35,12 @@ for name in "${models[@]}"; do
   sbatch_script=$(mktemp)
   cat <<EOT > $sbatch_script
 #!/bin/bash
-#SBATCH --job-name=$name
+#SBATCH --job-name=metrics_$name
 #SBATCH --output=metrics_logs/metrics_$name.txt
 #SBATCH --time=30-00:00:00
 #SBATCH --cpus-per-task=8
 #SBATCH --gres=gpu:1
-#SBATCH --mem-per-cpu=32G
+#SBATCH --mem-per-cpu=128G
 
 export PYTHONUNBUFFERED=1
 python -u compute_metrics.py --model $name

@@ -7,7 +7,7 @@ from mteb import MTEB
 from mteb.models.cache_wrapper import CachedEmbeddingWrapper
 
 from utils.models import CustomModel, CustomDatabricksModel, CustomGoogleModel, CustomRandomModel
-from config.eval import RETRIEVAL_TAKS
+from config.eval import RETRIEVAL_TASKS
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -42,9 +42,10 @@ else:
     model = mteb.get_model(model_name)
 
 # Run evaluation
-evaluation = MTEB(tasks=RETRIEVAL_TAKS) 
+evaluation = MTEB(tasks=RETRIEVAL_TASKS) 
 cache_name = model_name.replace("/", "_")
 cache_path = os.environ.get("CACHE_PATH")
+results_path = os.environ.get("MTEB_RESULTS_PATH")
 model_with_cached_emb = CachedEmbeddingWrapper(
     model, cache_path=f"{cache_path}/cache_{cache_name}"
 )
@@ -55,7 +56,7 @@ evaluation.run(model_with_cached_emb,
                encode_kwargs={"batch_size": 1,
                               "normalize_embeddings": True,
                               "model_name": model_name},
-               output_folder=f"results/{model_name}",
+               output_folder=f"{results_path}{model_name}",
                corpus_chunk_size=1000)
 
 print(f"Completed {model_name}.")

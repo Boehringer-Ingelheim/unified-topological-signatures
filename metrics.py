@@ -168,11 +168,6 @@ def compute_silhouette_score(X, eps=0.5, min_samples=5):
         return np.nan
 
 
-# def compute_betti(dgms, idx=0):
-#     dgm = dgms[idx]
-#     dgm = dgm[dgm[:, 1] < np.inf]
-#     return dgm.shape[0]
-
 def compute_ph_entropy(X, idx=0, distance_metric="euclidean"):
     dgms = ripser(X, maxdim=idx, metric=distance_metric)['dgms']
     print("Computing PH entropy on dgms:", dgms[idx].shape[0])
@@ -299,7 +294,7 @@ def compute_uniform_loss(x, t=2):
     logging.info('Computing uniform loss.')
     if not isinstance(x, torch.Tensor):
         x = torch.tensor(x)
-    return torch.pdist(x, p=2).pow(2).mul(-t).exp().mean().log().numpy()
+    return torch.pdist(x.double(), p=2).pow(2).mul(-t).exp().mean().log().numpy()
 
 
 def compute_euler_characteristic(x) -> int:
@@ -312,7 +307,7 @@ def compute_euler_characteristic(x) -> int:
 def compute_effective_rank(X):
     logging.info('Computing effective rank.')
     # https://aclanthology.org/2020.lrec-1.589.pdf
-    s = np.linalg.svd(X, compute_uv=False)
+    s = np.linalg.svd(X.astype(np.float32), compute_uv=False)
     sum_s = np.sum(s)
     p = s / sum_s
     erank = np.exp(-np.sum(p * np.log(p)))

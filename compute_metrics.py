@@ -10,7 +10,7 @@ from functools import reduce
 from dotenv import load_dotenv
 from sklearn.neighbors import NearestNeighbors
 
-from config.eval import RETRIEVAL_TAKS
+from config.eval import RETRIEVAL_TASKS
 from config.metrics import METRICS_CONFIG
 from metrics import gini_coefficient
 from utils.general import (load_embeddings, process_embeddings, sample_vectors, 
@@ -98,6 +98,7 @@ def add_mteb_results(task_data, results):
             # We use the train data as fallback if no split is available
             # This doesn't really affect topology.
             try:
+                print("WARN: No test split found, falling back to other splits.")
                 task_data[metric] = results["scores"]["train"][0][metric]
             except Exception:
                 task_data[metric] = results["scores"]["dev"][0][metric]
@@ -113,6 +114,9 @@ def get_embeddings_by_hash(data, texts):
 
 
 def get_top_bottom_knn(df, data, vectors, top_n=100, bottom_n=100, k=100, exlude_zeros=True):
+    """
+    Computes the k nearest neighbors of a document using cosine similarity.
+    """
     forward = list(range(0, top_n))
     reverse = list(range(0, -bottom_n, -1))
 
@@ -138,6 +142,9 @@ def get_top_bottom_knn(df, data, vectors, top_n=100, bottom_n=100, k=100, exlude
 
 
 def compute_global_signatures(vectors, model, task, retrievability_data, subset="corpus"):
+    """
+    Computes global signatures for all feasible sample sizes.
+    """
     all_results = []
     # Sample until one larger than actual dataset size
     index = first_larger_index(METRICS_CONFIG["sample_sizes"], vectors.shape[0])
@@ -254,7 +261,7 @@ else:
     models = [args.model]
 
 for model in models:
-    for task in RETRIEVAL_TAKS:
+    for task in RETRIEVAL_TASKS:
         # Load data from cache
         cached_name = f"cache_{model}".replace("/", "_")
         data, results = load_embeddings(cached_name, task)
@@ -262,11 +269,11 @@ for model in models:
             print(f"No data found for model: {model}, task: {task}. Skipping...")
             continue
         vectors = process_embeddings(data)
-        try:
-            query_vectors, collection_vectors = separate_query_vectors(data, vectors, model, task)
-        except Exception:
-            print(f"Error loading query data: {model}, task: {task}. Skipping...")
-            continue
+        #try:
+        query_vectors, collection_vectors = separate_query_vectors(data, vectors, model, task)
+        # except Exception:
+        #     print(f"Error loading query data: {model}, task: {task}. Skipping...")
+        #     continue
         retrievability_data = get_retrievability_data(model, task)
     
         # ----- Global measures ------
@@ -274,7 +281,8 @@ for model in models:
         compute_global_signatures(query_vectors, model, task, retrievability_data, subset="queries")
 
         # ------- Query-based measures -------
-        compute_query_signatures(data, model, task)
+        # Currently not required for the experiments
+        # compute_query_signatures(data, model, task)
 
         # ------- Retrievability of documents -------
         compute_retrievability_signatures(data, retrievability_data)

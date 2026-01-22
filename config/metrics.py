@@ -5,7 +5,7 @@ METRICS_CONFIG = {
                          "recall_at_5", "recall_at_20", "recall_at_100",
                          "map_at_5", "map_at_20", "map_at_100",
                          "main_score"],
-    "random_seed": 2025, # 1234, 2025, 123
+    "random_seed": 1234, # 1234, 2025, 123
     "distance_metrics": ["euclidean", "cosine"],
     "sample_sizes": [1000, 2000, 3000, 4000, 5000, 10000, 20000, 50000, 100000, 500000],
     "metrics": {
@@ -69,7 +69,7 @@ METRICS_CONFIG = {
         "iso_score": {
             "compute_func": compute_iso_score,
             "requires_distance": False,
-            "max_sample_size": 500000,
+            "max_sample_size": 100000,
             "kwargs": {}
         },
         "pca_dim": {

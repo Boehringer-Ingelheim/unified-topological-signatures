@@ -1,7 +1,8 @@
 import numpy as np
-from utils import load_embeddings, process_embeddings
 from cka import CKA
-from config import RETRIEVAL_TAKS, MODELS
+
+from config.eval import RETRIEVAL_TAKS, MODELS
+from utils.general import load_embeddings, process_embeddings
 
 
 np_cka = CKA()
@@ -18,7 +19,7 @@ for task in RETRIEVAL_TAKS:
             data, results = load_embeddings(cached_name, task)
             vectors_1 = process_embeddings(data)
 
-             # Sample index
+            # Sample index
             if random_index is None:
                 n_vectors = min(max_vectors, vectors_1.shape[0])
                 print(f"Sampling indices for {task} with {n_vectors} vectors")

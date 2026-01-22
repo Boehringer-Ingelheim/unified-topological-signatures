@@ -4,7 +4,7 @@
 # . ../envs/your_env_name/bin/activate
 
 models=(
-  # "google/gemini-embedding-001"
+  "google/gemini-embedding-001"
   # "BAAI/bge-small-en-v1.5"
   # "BAAI/bge-base-en-v1.5" 
   # "BAAI/bge-large-en-v1.5"
@@ -13,7 +13,7 @@ models=(
   # "thenlper/gte-large"
   # "Alibaba-NLP/gte-Qwen2-1.5B-instruct"
   # "Alibaba-NLP/gte-Qwen2-7B-instruct"
-  'sentence-transformers/gtr-t5-base' 
+  # 'sentence-transformers/gtr-t5-base' 
   # 'sentence-transformers/gtr-t5-large'
   # 'sentence-transformers/gtr-t5-xxl'
   # "Qwen/Qwen3-Embedding-0.6B"
@@ -42,8 +42,8 @@ for name in "${models[@]}"; do
 #SBATCH --output=results_logs/analysis_$sanitized_name.txt
 #SBATCH --cpus-per-task=8
 #SBATCH --time=30-00:00:00
-#SBATCH --gres=gpu:1
-#SBATCH --mem-per-gpu=32G
+#SBATCH --gres=gpu:3
+#SBATCH --mem-per-gpu=128G
 
 export TOKENIZERS_PARALLELISM=true
 

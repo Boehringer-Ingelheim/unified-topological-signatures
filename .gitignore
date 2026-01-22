@@ -3,5 +3,8 @@
 metrics_logs/
 results/
 results_logs/
-metrics_results/
+metric_results/
 detailed_results/
+figures/
+document_vecs/
+local_data/

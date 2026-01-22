@@ -140,14 +140,9 @@ class CustomGoogleModel():
         self.model_name = model_name
         self.init_client()
 
-        if "gemini-embedding-001" in model_name:
+        if "text-embedding-004" in model_name:
             self.config = EmbedContentConfig(
-                        task_type="RETRIEVAL_DOCUMENT",
-                        output_dimensionality=3072,
-                    )
-        elif "text-embedding-004" in model_name:
-            self.config = EmbedContentConfig(
-                        task_type="RETRIEVAL_DOCUMENT",
+                        task_type="SEMANTIC_SIMILARITY",
                         output_dimensionality=768
                     ) 
 
@@ -161,11 +156,26 @@ class CustomGoogleModel():
         **kwargs,
     ) -> np.ndarray:
         vectors = []
-        for sentence in tqdm(sentences):
+              
+        if kwargs["prompt_type"] == "query":
+            self.config = EmbedContentConfig(
+                        task_type="RETRIEVAL_QUERY",
+                        output_dimensionality=3072,
+                        )
+        elif kwargs["prompt_type"] == "document" or kwargs["prompt_type"] == "passage":
+            self.config = EmbedContentConfig(
+                        task_type="RETRIEVAL_DOCUMENT",
+                        output_dimensionality=3072
+                        )
+        else:
+            raise Exception("Unsupported prompt type.")
+        
+        for i in tqdm(range(0, len(sentences), 250)): 
+            batch = sentences[i:i+250]
             try:
                 response = self.client.models.embed_content(
                     model=self.model_name.replace("google/", ""),
-                    contents=sentence,
+                    contents=batch,
                     config=self.config,
                 )
             except RemoteProtocolError:
@@ -173,7 +183,7 @@ class CustomGoogleModel():
                 self.init_client()
                 response = self.client.models.embed_content(
                     model=self.model_name.replace("google/", ""),
-                    contents=sentence,
+                    contents=batch,
                     config=self.config,
                 )
             except Exception as e:
@@ -181,12 +191,12 @@ class CustomGoogleModel():
                     sleep(60)
                     response = self.client.models.embed_content(
                         model=self.model_name.replace("google/", ""),
-                        contents=sentence,
+                        contents=batch,
                         config=self.config,
                     )
                 else:
                     raise Exception(e)
-            vectors.append(response.embeddings[0].values)
+            vectors.extend([v.values for v in response.embeddings])
         embeddings = np.array(vectors).astype(np.float32)
         return embeddings
 

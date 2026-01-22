@@ -60,7 +60,7 @@ def process_embeddings(data):
         last_non_zero_row -= 1
 
     truncated_data = data.vectors[:last_non_zero_row]
-    return np.array(truncated_data)
+    return np.array(truncated_data, dtype=np.float16)
 
 def sample_vectors(truncated_data, n, seed):
     if truncated_data.shape[0] > n:
@@ -71,24 +71,65 @@ def sample_vectors(truncated_data, n, seed):
         print("Not enough vectors to sample from, returning all vectors.")
         return truncated_data
 
+# def separate_query_vectors(cache_data, all_vectors, model, dataset):
+#     query_hashes = pd.read_pickle(f"detailed_results/{model}/{dataset}_query_hashes.pkl")
+#     query_df = pd.DataFrame(query_hashes, columns=["query_text", "hash"])
+#     query_df["vectors"] = query_df["query_text"].apply(lambda x: cache_data.get_vector(x))
+
+#     # We assume that the first docs in the corpus are the query vectors
+#     # Here we make sure to remove only documents that have the same embeddings
+#     query_indices_in_cache = []
+#     for i, q in query_df.iterrows():
+#         print(i)
+#         embedding_q = np.array(q["vectors"], dtype=np.float16)
+#         match_arr = np.where(np.all(all_vectors == embedding_q, axis=1))[0]
+#         if match_arr.shape[0] > 0:
+#             match_idx = match_arr[0]
+#             query_indices_in_cache.append(match_idx)
+#         else:
+#             print(f"Embedding vector for indx {i} not found in corpus.")
+#         if i % 10000 == 0 and i > 0:
+#             print(f"Processed {i} query vectors.")
+
+#     query_vectors = np.stack(query_df["vectors"].values)
+#     corpus_vectors = np.delete(all_vectors, query_indices_in_cache, axis=0)
+#     return query_vectors, corpus_vectors
+
+
 def separate_query_vectors(cache_data, all_vectors, model, dataset):
+    # Load query hashes and vectors
     query_hashes = pd.read_pickle(f"detailed_results/{model}/{dataset}_query_hashes.pkl")
     query_df = pd.DataFrame(query_hashes, columns=["query_text", "hash"])
     query_df["vectors"] = query_df["query_text"].apply(lambda x: cache_data.get_vector(x))
 
-    # We assume that the first docs in the corpus are the query vectors
-    # Here we make sure to remove only documents that have the same embeddings
+    # Convert all corpus vectors to a hash map for O(1) lookup
+    print("Building corpus hash map...")
+    corpus_hash_map = {
+        all_vectors[i].astype(np.float16).tobytes(): i
+        for i in range(all_vectors.shape[0])
+    }
+
+    # Find matching indices
     query_indices_in_cache = []
     for i, q in query_df.iterrows():
-        embedding_q = q["vectors"]
-        match_idx = np.where(np.all(all_vectors == embedding_q, axis=1))[0][0]
-        query_indices_in_cache.append(match_idx)
-        if i % 10000 == 0 and i > 0:
+        if i % 1000 == 0 and i > 0:
             print(f"Processed {i} query vectors.")
 
+        embedding_q = np.array(q["vectors"], dtype=np.float16)
+        key = embedding_q.tobytes()
+
+        match_idx = corpus_hash_map.get(key, None)
+        if match_idx is not None:
+            query_indices_in_cache.append(match_idx)
+        else:
+            print(f"Embedding vector for index {i} not found in corpus.")
+
+    # Build final outputs
     query_vectors = np.stack(query_df["vectors"].values)
     corpus_vectors = np.delete(all_vectors, query_indices_in_cache, axis=0)
+
     return query_vectors, corpus_vectors
+
     
 
 def launch_new_job_on_failure(name):

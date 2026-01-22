@@ -3,7 +3,6 @@
 ![Visual Abstract](images/visual_abstract.png)
 
 
-
 ## Installation
 
 ### Dependencies and Modified MTEB version
@@ -20,7 +19,9 @@ Run `pip install -r requirements.txt` to install the remaining dependencies. For
 ### .env file
 Create a .env file with the following entries:
 ```
-CACHE_PATH=""
+MTEB_RESULTS_PATH=results/
+METRICS_PATH=metric_results/
+CACHE_PATH=embeddings/
 ```
 It will be loaded automatically.
 
@@ -36,7 +37,7 @@ python compute_results.py --model <some-model-name>
 ``` 
 
 ### Adding custom models
-In `utils/models.py` we provide a few examples for adding custom models from cloud platforms (e.g. self-hosted platforms, Databricks, google...). We use a prefix in the name to route the models to their corresponding model. We have also added basic error handling examples, such as context window overflow or hitting request rate limits. 
+In `utils/models.py` we provide a few examples for adding custom models from cloud platforms (e.g. self-hosted platforms, Databricks, google...). We use a prefix in the name to route the models to their corresponding model. We have also added basic error handling examples, such as context window overflow or hitting request rate limits. [Here](https://github.com/embeddings-benchmark/mteb/tree/main/mteb/models/model_implementations) you can find additional model implementations.
 
 In addition, we provide a custom random model (prefix _random_), which allows to generate synthetic embeddings for any kind of analysis. Note that MTEB uses sentence-transformers as default choice when providing a model name.
 
@@ -60,10 +61,25 @@ If you want to compute the metrics for a single model, you can also simply call 
 ```
 python compute_metrics.py --model <some-model-name>
 ``` 
+The Python script will compute global signatures for documents and queries, signatures of the query neighborhood and signatures of documents with high and low retrievability. Important: The signatures will be computed for different sample sizes (up to the maximum size specified in the metrics config file).
 
-## Analysis notebooks
+## Compute CKA
+The directory `cka` contains a script to compute the Centered Kernel Alignment between all models across all datasets. It results in a pairwise distance matrix per dataset, which will be saved as numpy array. 
+
+# Notebooks
+The plots and analyses are implemented in notebooks:
+- `01_topological_signatures.ipynb`: Correlation plots, PCA analyses, predictive models, representational similarity.
+- `02_collection_analysis.ipynb`: Collection performance prediction, retrieval performance correlation, UMAP clustering.
+- `03_retrievability.ipynb`: Retrievability bias prediction, bias by architecture, embedding space vizualizations.
+- `04_cka.ipynb`: Plots for Centered Kernel Alignment computations.
+- `05_metrics_scaling.ipynb`: Time complexity and sample size robustness of metrics.
+- `06_misc.ipynb`: Utility functions to compute UTS and check processing status.
 
 
-- Compute requirements (128 GB), which GPU?
+We provide a dataframe with the data of the computed signatures for potential future analyses (`data/uts_data.csv`). To execute the notebooks completely, it however requires to compute all embeddings and run all experiments (by executing both `compute_results.py` and `compute_metrics.py`).
 
-- Density of query / document space is proxy --> Citation (standard for retr. bias)
+
+# Citation
+```
+Anonymized
+```

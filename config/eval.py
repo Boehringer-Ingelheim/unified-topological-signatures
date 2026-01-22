@@ -1,15 +1,15 @@
-RETRIEVAL_TAKS = [
+RETRIEVAL_TASKS = [
                 "ArguAna",
                 "NFCorpus",
-                # "SciFact",
-                # "SCIDOCS",
-                # "CQADupstackEnglishRetrieval",
-                # "QuoraRetrieval",
-                # "FiQA2018",
-                # "ClimateFEVER",
-                # "TRECCOVID",
-                # "MSMARCO",
-                # "Touche2020"
+                "SciFact",
+                "SCIDOCS",
+                "CQADupstackEnglishRetrieval",
+                "QuoraRetrieval",
+                "FiQA2018",
+                "ClimateFEVER", 
+                "TRECCOVID",
+                "MSMARCO",
+                "Touche2020"
                ]
 
 MODELS = [
